@@ -30,3 +30,30 @@ it should use today’s date to get the month and year.
 import sys
 import calendar
 from datetime import datetime
+
+cur_year = datetime.now().year
+cur_month = datetime.now().month
+
+# args = sys.argv
+
+# if len(args) == 3:
+#   if(args[1])
+#   month = int(args[1])
+#   year = int(args[2])
+#   print(calendar.month(year, month))
+# elif len(args) == 2:
+#   month = int(args[1])
+#   print(calendar.month(cur_year, month))
+# elif len(args) == 1:
+#   print(calendar.month(cur_year, cur_month))
+# else:
+#   print("Just need a year and a month")
+  
+import argparse
+
+my_parser = argparse.ArgumentParser(description="Please enter [month] [year]")
+my_parser.add_argument("month", default=cur_month, type=int, choices=range(1, 13), nargs="?")
+my_parser.add_argument("year", default=cur_year, type=int, choices=range(1900, cur_year + 1), nargs="?")
+
+args = my_parser.parse_args()
+print(calendar.month(args.year, args.month))
